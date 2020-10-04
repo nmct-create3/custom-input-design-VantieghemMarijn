@@ -39,13 +39,16 @@
     --global-color-neutral-xxx-dark: #35374d;
     --global-color-neutral-xxxx-dark: #20223a;
 
+    --global-color-white:white;
+    --global-color-dark:Black;
+
     /* border stuff */
     --global-borderRadius: 3px;
     --global-borderWidth: 1px;
-t    --global-borderColor:#81ADF0;
+    --global-borderColor: #81ADF0;
 
     /* transitions */
-    --global-transitionTiming-alpha: .1s ease-out;
+    --global-transitionTiming-alpha: .3s ease-out;
     --global-transition: opacity 0.3s;
 
     /* Baseline settings */
@@ -65,6 +68,9 @@ t    --global-borderColor:#81ADF0;
     --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
     --global-input-focus-borderColor: var(--global-color-alpha);
     --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+
+    /*pag color*/
+    
 }
 
 /*------------------------------------*\
@@ -660,12 +666,19 @@ input::placeholder {
     --custom-option-borderColor: var(--global-input-borderColor);
     --custom-option-focus-borderColor: var(--global-input-focus-borderColor);
 }
-.c-custom-option:hover {
+/* .c-custom-option:hover {
     --custom-option-borderColor: var(--custom-option-hover-borderColor);
+  } */
+.c-option--hidden:hover + .c-custom-option  .c-custom-option__fake-input {
+    border-color: var(--global-color-neutral-xx-light);
+    
   }
-.c-custom-option:hover .c-custom-option__fake-input {
-    border-color: var(--global-input-hover-borderColor);
+.c-option--hidden:focus + .c-custom-option  .c-custom-option__fake-input {
+    border-color: var(--global-borderColor);
+    box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
   }
+  
+
 .c-custom-option__fake-input{
     margin-right: 8px;
     display: flex;
@@ -677,10 +690,6 @@ input::placeholder {
 }
 .c-custom-option__fake-input--checkbox{
     border-radius: var(--global-borderRadius);
-}
-.c-custom-option__fake-input:hover {
-    border-color: var(--global-borderColor);
-    box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
 }
 .c-custom-option__fake-input:focus ,.c-custom-option__fake-input:active{
     border-color: var(--global-color-alpha);
@@ -709,6 +718,38 @@ input::placeholder {
   toggle input
   
   */
+.c-option--hidden:hover + .c-custom-toggle .c-custom-toggle__fake-input{
+    border-color: var(--global-color-neutral-xx-light);
+    transition: all var(--global-transitionTiming-alpha);
+}
+.c-option--hidden:focus + .c-custom-toggle .c-custom-toggle__fake-input{
+    
+    border-color: var(--global-borderColor);
+    box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+    transition: all var(--global-transitionTiming-alpha);
+}
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input{
+    background-color: var(--global-color-alpha);
+    border-color: var(--global-color-alpha-dark);
+    transition: all var(--global-transitionTiming-alpha);
+}
+
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input::after{
+    transform: translateX(25px);
+    transition: all var(--global-transitionTiming-alpha);
+    
+}
+.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input::after{
+    width:33px;
+    border-radius: 10px;
+    transition: all var(--global-transitionTiming-alpha);
+}
+.c-option--hidden:active:checked + .c-custom-toggle .c-custom-toggle__fake-input::after{
+    width:33px;
+    border-radius: 10px;
+    transform: translateX(12px);
+    transition: all var(--global-transitionTiming-alpha);
+}
 
 .c-custom-toggle{
     display: flex;
@@ -727,14 +768,42 @@ input::placeholder {
     border-radius: 24px;
 }
 .c-custom-toggle__fake-input::after{
-
+    margin-right: 0px;
     content: "";
     display: block;
     width: 22px;
     height: 22px;
     border-radius: 100%;
-    background-color:var(--global-color-neutral-xxxx-light) ;
-    border: 1px solid #707070;
+    background-color:var(--global-color-white) ;
+    /*border: 1px solid var(--global-color-neutral-xxx-light)*/
+}
+.c-option--hidden{
+    border-color: var(--global-color-neutral-xx-light);
+}
+.c-toggle-list__item + .c-toggle-list__item{
+    padding-top: 13px;
+    border-top: 1px solid var(--global-color-neutral-xxx-light);
+}
+.c-custom-toggle--inverted{
+    flex-direction: row-reverse;
+    margin-right: 0px;
+}
+.c-custom-toggle--inverted >.c-custom-toggle__fake-input{
+    margin-right: 0px;
+    margin-left: 8px;
+}
+.c-custom-select{
+    display: block;
+    position: relative;
+}
+.c-custom-select__symbol{
+    fill: var(--global-color-neutral-x-light);
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    height: 24px;
+    width: 24px;
+    pointer-events: none;
 }
 /*
     Component: Label
