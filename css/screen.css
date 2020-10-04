@@ -14,6 +14,7 @@
     src: url("../fonts/Inter-SemiBold.woff2") format("woff2")
 }
 
+
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
@@ -41,8 +42,12 @@
 
     --global-color-white:white;
     --global-color-dark:Black;
-
-    /* border stuff */
+    --global-page-color:var(--global-color-neutral-xx-dark);
+    --global-page-backgroundColor:var(--global-color-neutral-xxxx-light);
+    --global-card-backgroundcolor:var(--global-color-white);
+    --global-title-color:var(--global-color-neutral-xxxx-dark);
+    --global-label-color:var(--global-color-neutral-xx-dark);
+       /* border stuff */
     --global-borderRadius: 3px;
     --global-borderWidth: 1px;
     --global-borderColor: #81ADF0;
@@ -72,6 +77,13 @@
     /*pag color*/
     
 }
+@media (prefers-color-scheme: dark) {
+    :root {
+        --global-page-color: White;
+        --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+    }
+}
+
 
 /*------------------------------------*\
 #GENERIC
@@ -87,11 +99,17 @@ html {
     font-size: 16px;
     line-height: 1.5;
     font-family: "Inter Web", Helvetica, arial, sans-serif;
-    color: var(--global-color-neutral-xxxx-dark);
-    background-color: var(--global-color-neutral-xxxx-light);
+    color: var(--global-page-color);
+    background-color: var(--global-page-backgroundColor);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;    
+}
+@media (prefers-color-scheme: dark) {
+    html {
+        /*--global-page-backgroundcolor:var(--global-color-neutral-xxxx-dark);*/
+        
+    }
 }
 
 *,
@@ -523,21 +541,42 @@ input::placeholder {
     justify-content: center;
     margin-bottom: var(--global-whitespace-lg);
 }
+@media (prefers-color-scheme: dark) {
+    .c-logo {
+        --logo__path--1--fill: White;
+        --logo__path--2--fill: var(--logo__path--1--fill);
+        --logo__path--3--fill: var(--logo__path--1--fill);
+      }
+}
 
 .c-logo__symbol {
     height: 100%;
 }
 
 .c-logo__path--1 {
-    fill: var(--global-color-neutral-xxxx-dark);
-}
-
-.c-logo__path--2 {
-    fill: var(--global-color-alpha);
-}
-
-.c-logo__path--3 {
-    fill: var(--color-alpha-x-dark);
+    fill: var(--logo__path--1--fill, var(--global-color-neutral-xxxx-dark));
+  }
+  
+  .c-logo__path--2 {
+    fill: var(--logo__path--2--fill, var(--global-color-alpha));
+  }
+  
+  .c-logo__path--3 {
+    fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
+  }
+  @media (prefers-color-scheme: dark) {
+    
+      .c-logo__path--1 {
+        fill: var(--logo__path--1--fill, var(--global-color-neutral-xxxx-dark));
+      }
+      
+      .c-logo__path--2 {
+        fill: var(--logo__path--2--fill, var(--global-color-alpha));
+      }
+      
+      .c-logo__path--3 {
+        fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
+      }
 }
 
 /*
@@ -547,12 +586,19 @@ input::placeholder {
 */
 
 .c-card {
-    background-color: White;
+    
+    background-color: var(--global-card-backgroundcolor);
     margin-bottom: var(--global-whitespace);
     border-radius: var(--global-borderRadius);
     box-shadow: 0 0 0 var(--global-borderWidth) rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
     overflow: hidden;
 }
+@media (prefers-color-scheme: dark) {
+    .c-card{
+        --global-card-backgroundcolor:var(--global-color-neutral-xxx-dark);
+    }
+}
+
 
 /* Add padding to child for more flexibility */
 .c-card__body,
@@ -563,13 +609,25 @@ input::placeholder {
 .c-card__footer {
     text-align: center;
     border-top: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
+    color: var(--global-color-neutral-dark);
+}
+@media (prefers-color-scheme: dark) {
+    .c-card__footer{
+        border-top-color: var(--global-color-neutral-xxxx-dark);
+    }
 }
 
 .c-card__title {
     text-align: center;
     font-size: 18px;
+    color: var(--global-title-color);
     line-height: calc(var(--global-baseline) * 3);
     font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+    .c-card__title{
+        --global-title-color:var(--global-color-white);
+    }
 }
 
 /* This allows c-card__body and __footer to have equal padding everywhere */
@@ -611,7 +669,7 @@ input::placeholder {
     Class to put on all input="text" like form inputs
 */
 
-.c-input {
+.c-input     {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -629,6 +687,8 @@ input::placeholder {
     color: var(--global-input-color);   
 }
 
+
+
 .c-input:hover {
     border-color: var(--global-color-neutral-xx-light);
 }
@@ -637,6 +697,16 @@ input::placeholder {
 .c-input:active {
     border-color: var(--global-color-alpha);
     box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+}
+@media (prefers-color-scheme: dark) {
+    .c-input{
+        --global-input-backgroundColor:var(--global-color-neutral-xxxx-dark);
+        border-color:var(--global-color-neutral-xxxx-dark);
+        --global-input-color:var(--global-color-neutral-dark)
+    }
+    .c-input:hover{
+        border-color: var(--global-color-neutral-xxx-dark);
+    }
 }
 
 
@@ -687,6 +757,11 @@ input::placeholder {
     width: 16px;
     height: 16px;
     border: 1px solid var(--custom-option-borderColor);
+}
+@media (prefers-color-scheme: dark) {
+    .c-custom-option__fake-input--checkbox{
+       background-color: var(--global-color-neutral-xxxx-dark);
+    }
 }
 .c-custom-option__fake-input--checkbox{
     border-radius: var(--global-borderRadius);
@@ -816,7 +891,12 @@ input::placeholder {
     font-size: 14px;
     padding-bottom: var(--global-whitespace-xs);    
     line-height: calc(var(--global-baseline) * 2);
-    color: var(--global-color-neutral-xx-dark);
+    color: var(--global-label-color);
+}
+@media (prefers-color-scheme: dark) {
+    .c-label{
+        --global-label-color:var(--global-color-neutral-x-light);
+    }
 }
 
 .c-label--option {
