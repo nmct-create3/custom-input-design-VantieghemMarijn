@@ -79,7 +79,7 @@
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        /*qtes*/
+        
         --global-page-color: White;
         --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
     }
